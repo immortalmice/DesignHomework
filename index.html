@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Homework</title>
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+        }
+        button {
+            cursor: pointer;
+        }
+        #scene {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--mainColor);
+        }
+        #container {
+            max-width: 75%;
+            max-height: 60%;
+            margin-bottom: 15vh;
+        }
+        #container p {
+            color: var(--textColor);
+        }
+        #color-board {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100vw;
+            height: 15vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+            font-size: x-large;
+        }
+        #color-board > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            height: 100%;
+        }
+        #mainColor {
+            background-color: var(--mainColor);
+        }
+    </style>
+</head>
+<body>
+    <div id="scene">
+        <div id="container">
+            <h1>Some Title Here</h1>
+            <p>Flying into London from the States last week, Dr Rajiv Shah had a packed agenda discussing the GAVI programme (the Global Alliance for Vaccines and Immunization) he was working on: one of many ways Dr Shah, an administrator for the US Agency for International Development (USAID), is trying to make peoples’ lives better and longer no matter where they are from.</p>
+            <p>USAID is currently undertaking several projects around the world, two of which Dr Shah spoke about in considerable detail. One of them is helping impoverished places in Africa, and elsewhere, to decrease the percentage of malnourished people, while aiming to stimulate their economy at the same time. This is being achieved by giving crop technology and other food technology to small-scale farmers from developing countries, and allowing them to grow their business using cell phones.</p>
+            <button onclick="nextColor()">Next</button>
+            <button onclick="previousColor()">Previous</button>
+        </div>
+    </div>
+    <div id="color-board">
+        <div id="mainColor"></div>
+        <div id="textColor"></div>
+    </div>
+    <script>
+        const createColor = (mainColor, textColor) => ({ mainColor, textColor })
+        const COLORS = [
+            createColor('#CBC1E8', '#946AD7'),
+            createColor('#B1ECEB', '#138989'),
+            createColor('#E5ECAD', '#B38024')
+        ]
+
+        let currentIndex = 0
+        const updateColor = () => {
+            const color = COLORS[currentIndex]
+            if (!color) return
+
+            Object.keys(color)
+                .forEach(key => {
+                    document.body.style.setProperty(`--${key}`, color[key])
+                    document.querySelector(`#${key}`).innerHTML = color[key]
+                    document.querySelector(`#${key}`).style.backgroundColor = `var(--${key})`
+                })
+        }
+        const nextColor = () => {
+            currentIndex ++
+            currentIndex %= COLORS.length
+            updateColor()
+        }
+        const previousColor = () => {
+            currentIndex --
+            currentIndex += COLORS.length
+            currentIndex %= COLORS.length
+            updateColor()
+        }
+
+        document.addEventListener("DOMContentLoaded", () => updateColor(currentIndex))
+    </script>
+</body>
+</html>
