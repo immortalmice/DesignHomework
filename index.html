@@ -26,8 +26,22 @@
             max-height: 60%;
             margin-bottom: 15vh;
         }
-        #container p {
+        #container p, #container h1 {
             color: var(--textColor);
+        }
+        #container button {
+            border: none;
+            padding: 0.75em 2em;
+            border-radius: 0.5em;
+            margin-right: 0.5em;
+            color: white;
+            font-size: 1em;
+        }
+        #container button.primary {
+            background-color: var(--primaryColor);
+        }
+        #container button.secondary {
+            background-color: var(--secondaryColor);
         }
         #color-board {
             position: fixed;
@@ -59,20 +73,24 @@
             <h1>Some Title Here</h1>
             <p>Flying into London from the States last week, Dr Rajiv Shah had a packed agenda discussing the GAVI programme (the Global Alliance for Vaccines and Immunization) he was working on: one of many ways Dr Shah, an administrator for the US Agency for International Development (USAID), is trying to make peoples’ lives better and longer no matter where they are from.</p>
             <p>USAID is currently undertaking several projects around the world, two of which Dr Shah spoke about in considerable detail. One of them is helping impoverished places in Africa, and elsewhere, to decrease the percentage of malnourished people, while aiming to stimulate their economy at the same time. This is being achieved by giving crop technology and other food technology to small-scale farmers from developing countries, and allowing them to grow their business using cell phones.</p>
-            <button onclick="nextColor()">Next</button>
-            <button onclick="previousColor()">Previous</button>
+            <br>
+            <br>
+            <button class="primary" onclick="previousColor()">Previous</button>
+            <button class="secondary" onclick="nextColor()">Next</button>
         </div>
     </div>
     <div id="color-board">
         <div id="mainColor"></div>
         <div id="textColor"></div>
+        <div id="primaryColor"></div>
+        <div id="secondaryColor"></div>
     </div>
     <script>
-        const createColor = (mainColor, textColor) => ({ mainColor, textColor })
+        const createColor = (mainColor, textColor, primaryColor, secondaryColor) => ({ mainColor, textColor, primaryColor, secondaryColor })
         const COLORS = [
-            createColor('#CBC1E8', '#946AD7'),
-            createColor('#B1ECEB', '#138989'),
-            createColor('#E5ECAD', '#B38024')
+            createColor('#CBC1E8', '#946AD7', '#7fc5a5', '#c5a87e'),
+            createColor('#B1ECEB', '#138989', '#b7a45f', '#c57e9f'),
+            createColor('#E5ECAD', '#B38024', '#2da77a', '#b189a6')
         ]
 
         let currentIndex = 0
